@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Cookie Fortune</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fffbe6;
+      text-align: center;
+      padding: 2rem;
+    }
+    .fortune {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      border: 2px dashed #ff9900;
+      background: #fffaf0;
+      border-radius: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>🥠 Your Smart Cookie Says...</h1>
+  <div class="fortune" id="fortune">Loading fortune...</div>
+
+  <script>
+    fetch('fortunes.json')
+      .then(response => response.json())
+      .then(data => {
+        const randomFortune = data[Math.floor(Math.random() * data.length)];
+        document.getElementById('fortune').innerText = randomFortune;
+      })
+      .catch(error => {
+        document.getElementById('fortune').innerText = "Oops! Couldn't load a fortune.";
+        console.error("Error fetching fortune:", error);
+      });
+  </script>
+</body>
+</html>
